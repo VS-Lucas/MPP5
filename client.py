@@ -16,5 +16,5 @@ class Client:
         sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sckt.connect(self.con)
 
-client = Client('179.34.63.160', 55555)
+client = Client('179.73.182.154', 55555)
 
