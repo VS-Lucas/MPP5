@@ -25,5 +25,4 @@ class Server:
     
         
 
-client = Server('192.168.1.7', 11010)
-
+client = Server('192.168.1.7', 55555)
