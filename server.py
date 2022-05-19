@@ -26,4 +26,4 @@ class Server:
 
 
 
-client = Server('192.168.0.105', 55555)
+client = Server('192.168.1.7', 55555)
