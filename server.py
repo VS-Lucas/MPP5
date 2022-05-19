@@ -22,7 +22,8 @@ class Server:
         pass
         
     
-    
-        
+
+
+
 
 client = Server('192.168.0.105', 55555)
