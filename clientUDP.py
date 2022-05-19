@@ -12,4 +12,6 @@ class Client:
         sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sckt.connect(self.con)
 
-client = Client('localhost', 55555)
+
+
+client = Client(socket.gethostname(), 55555)
