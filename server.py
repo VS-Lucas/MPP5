@@ -1,7 +1,7 @@
 import socket
 
 
-class Client:
+class Server:
     def __init__(self, _ip: str, _port: int):
         self.con = (_ip, _port)
         self.buildSocketTCP()
@@ -25,5 +25,5 @@ class Client:
     
         
 
-client = Client('localhost', 55555)
+client = Server('192.168.1.7', 11010)
 
