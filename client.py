@@ -10,9 +10,10 @@ class Client:
         # Criando o canal de comunicação TCP entre client -> servidor
         sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sckt.connect(self.con)
+    
     def buildSocketUDP(self):
-        # Criando o canal de comunicação TCP entre client -> servidor
-        sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Criando o canal de comunicação UDP entre client -> servidor
+        sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sckt.connect(self.con)
 
 client = Client('179.34.63.160', 55555)

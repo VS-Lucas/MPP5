@@ -1,6 +1,5 @@
 import socket
 
-
 class Server:
     def __init__(self, _ip: str, _port: int):
         self.con = (_ip, _port)
@@ -21,9 +20,4 @@ class Server:
     def recv(self):
         pass
         
-    
-
-
-
-
 client = Server('192.168.1.7', 55555)
