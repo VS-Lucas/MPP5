@@ -11,22 +11,23 @@ class Client:
         self.sendfile()
         self.recvfile()
 
-        # self.buildSocketUDP()
-
     def buildSocketUDP(self) -> None:
         # Criando o canal de comunicação TCP entre client -> servidor
-        self.sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sckt.connect(self.con)
 
     def sendfile(self) -> None:
         pathsize = os.path.getsize(self.path)
-        self.sckt = socket.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
+        print(pathsize)
+        self.sckt.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
 
         with open(self.path, 'rb') as file:
             byte_data = file.read(self.BUFFER)
             while byte_data:
                 self.sckt.send(byte_data)
                 byte_data = file.read(self.BUFFER)
+ 
+        print('Arquivo enviado com sucesso!')
     
     def recvfile(self) -> None:
         self.sckt.recv(1024)
@@ -40,15 +41,11 @@ class Client:
         print('Arquivo recebido')
         file.close()
     
-    def send(self):
+    def send_message(self):
         pass
     
     def recv(self):
         pass
-    # def buildSocketUDP(self):
-    #     # Criando o canal de comunicação UDP entre client -> servidor
-    #     sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #     sckt.connect(self.con)
 
 client = Client('179.152.253.19', 55555, "path-54MB.pdf", 50000)
 

@@ -16,22 +16,22 @@ class Server:
         sckt.listen(2)
         self.client1, self.addr1 = sckt.accept()
     
-        # print('Primeiro usuário conectado')
-        # self.client2, self.addr2 = sckt.accept()
-        # print('Segundo usuário conectado')
+        print('Primeiro usuário conectado')
+
 
     def sendfile(self) -> None:
         pathsize = os.path.getsize(self.path)
-        self.sckt = socket.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
+        self.client1.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
 
         with open(self.path, 'rb') as file:
             byte_data = file.read(self.BUFFER)
             while byte_data:
-                self.sckt.send(byte_data)
+                self.client1.send(byte_data)
                 byte_data = file.read(self.BUFFER)
+        print('Arquivo enviado com sucesso!')
 
     def recvfile(self) -> None:
-        self.msg = self.client1.recv(self.BUFFER).decode()
+        self.msg = self.client1.recv(1024).decode()
         self.size = self.msg.split()[2]
         self.file = self.msg.split()[1]
 
