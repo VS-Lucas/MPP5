@@ -52,4 +52,4 @@ class Server:
     def recv(self) -> None:
         pass
         
-client = Server('192.168.0.84', 55555, 50000)
+client = Server('192.168.0.106', 55555, 50000)

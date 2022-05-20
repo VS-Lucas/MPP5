@@ -47,5 +47,5 @@ class Client:
     def recv(self):
         pass
 
-client = Client('179.152.253.19', 55555, "path-54MB.pdf", 50000)
+client = Client('45.239.196.96', 55555, "path-54MB.pdf", 50000)
 
