@@ -10,9 +10,10 @@ class Server:
         sckt.bind(self.con)
         sckt.listen(2)
         self.client1, self.addr1 = sckt.accept()
-        print('Primeiro usuário conectado')
-        self.client2, self.addr2 = sckt.accept()
-        print('Segundo usuário conectado')
+    
+        # print('Primeiro usuário conectado')
+        # self.client2, self.addr2 = sckt.accept()
+        # print('Segundo usuário conectado')
 
     def send(self):
         pass
