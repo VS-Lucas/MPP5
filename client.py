@@ -19,13 +19,20 @@ class Client:
     def sendfile(self) -> None:
         pathsize = os.path.getsize(self.path)
         print(pathsize)
-        self.sckt.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
+        self.sckt.sendto(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'), self.con)
 
         with open(self.path, 'rb') as file:
             byte_data = file.read(self.BUFFER)
-            while byte_data:
-                self.sckt.send(byte_data)
-                byte_data = file.read(self.BUFFER)
+            try:
+                print(pathsize)
+                pathsize -= self.BUFFER
+                while pathsize > 0:
+                    print(pathsize)
+                    self.sckt.send(byte_data)
+                    byte_data = file.read(self.BUFFER)
+                    pathsize -= self.BUFFER
+            except:
+                print('merda')
  
         print('Arquivo enviado com sucesso!')
     
@@ -47,5 +54,5 @@ class Client:
     def recv(self):
         pass
 
-client = Client('45.239.196.96', 55555, "path-54MB.pdf", 50000)
+client = Client('179.152.253.19', 55555, "path-54MB.pdf", 1000000)
 
