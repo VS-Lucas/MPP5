@@ -18,12 +18,11 @@ class Server:
     
         print('Primeiro usuário conectado')
 
-
     def sendfile(self) -> None:
-        pathsize = os.path.getsize(self.path)
-        self.client1.sendall(bytes(f'Enviando arquivo: {self.path} | {pathsize} bytes', 'utf-8'))
+        pathsize = os.path.getsize(self.file)
+        self.client1.sendall(bytes(f'Enviando arquivo: {self.file} | {pathsize} bytes', 'utf-8'))
 
-        with open(self.path, 'rb') as file:
+        with open(self.file, 'rb') as file:
             byte_data = file.read(self.BUFFER)
             while byte_data:
                 self.client1.send(byte_data)
@@ -31,18 +30,20 @@ class Server:
         print('Arquivo enviado com sucesso!')
 
     def recvfile(self) -> None:
-        self.msg = self.client1.recv(1024).decode()
-        self.size = self.msg.split()[2]
-        self.file = self.msg.split()[1]
+        self.msg = self.client1.recvfrom(1024)
+        self.size = int(self.msg[0].split()[4].decode())
+        self.file = self.msg[0].split()[2].decode()
 
         with open(self.file, 'wb') as file:
             byte_data = self.client1.recv(self.BUFFER)
-            fsize -= self.BUFFER
-
-            while fsize > 0:
-                file.write(byte_data)
-                byte_data - self.client1.recv(self.BUFFER)
-                fsize -= self.BUFFER
+            self.size -= self.BUFFER
+            try:
+                while self.size > 0:
+                    file.write(byte_data)
+                    byte_data = self.client1.recv(self.BUFFER)
+                    self.size -= self.BUFFER
+            except:
+                print('error no except')
         print('Arquivo recebido')
         file.close()
 
@@ -52,4 +53,4 @@ class Server:
     def recv(self) -> None:
         pass
         
-client = Server('192.168.0.106', 55555, 50000)
+client = Server('192.168.0.84', 55555, 100000)
